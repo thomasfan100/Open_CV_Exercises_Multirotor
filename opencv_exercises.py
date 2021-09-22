@@ -4,20 +4,11 @@ import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 from scipy.ndimage import generic_filter, convolve
 import cv2
-
-#PROBLEM 4
-img = mpimg.imread('./strawberry.jpg')
-img2 = mpimg.imread('./strawberry-solved.jpg')
-img_height, img_width, _ = img.shape
-
-img = img[np.arange(0,img_height):]
-plt.imshow(img)
-plt.show()
-plt.imshow(img2) #x: 150 -> 600  y: 225 -> 450
-plt.show()
-
+#PROBLEM 6
+img = mpimg.imread('./lake.jpg')
 '''
 #PROBLEM 5
+#PART A
 img = mpimg.imread('./rose-piano.jpg')
 img = img / 255
 blur_kernel = [[
@@ -27,16 +18,60 @@ blur_kernel = [[
 
 blur_kernel = np.array(blur_kernel)
 blur_kernel /= np.sum(blur_kernel)  # ensure kernel sums to ~1
-
 blurred = convolve(img, blur_kernel)
 plt.imshow(blurred)
 plt.show()
 
-
- # THIS IS FOR PART B
+#PART B
 img2 = mpimg.imread('./rose-piano.jpg')
 blur = cv2.GaussianBlur(img2,(5,5),0)
 plt.imshow(blur)
+plt.show()
+
+#PART C
+img3 = mpimg.imread('./rose-piano.jpg')
+blur_kernel2 = [
+    [-1,-1,-1],
+    [-1,8,-1],
+    [-1,-1,-1]]
+blur_kernel2 = np.array(blur_kernel2)
+gray_img = np.mean(img3,axis=2)
+edges = convolve(gray_img, blur_kernel2)
+binarized_edges = np.where(edges > .25,1,0)
+plt.imshow(binarized_edges,cmap='gray')
+plt.show()
+
+#PART D
+img4 = mpimg.imread('./rose-piano.jpg')
+blur2 = cv2.Laplacian(img4, cv2.CV_8U, ksize=3)
+plt.imshow(blur2)
+plt.show()
+
+#PART E
+img5 = cv2.Laplacian(blur,cv2.CV_8U, ksize=3)
+plt.imshow(img5)
+plt.show()
+'''
+'''
+#PROBLEM 4
+img = mpimg.imread('./strawberry.jpg')
+img2 = mpimg.imread('./strawberry-solved.jpg')
+img_height, img_width, _ = img.shape
+
+#flipping image horizontally
+#img = img[:,::-1]
+img = cv2.flip(img, 1)
+
+#correcting image size
+#img = img[np.arange(0, img_height, 2)]
+img = cv2.resize(img, (600, 450))
+
+#inverting the image
+img = 255 - img
+
+plt.imshow(img)
+plt.show()
+plt.imshow(img2) #x: 150 -> 600  y: 225 -> 450
 plt.show()
 '''
 '''
