@@ -1,11 +1,66 @@
-#mahtoj polish matteo matt
+#mahtoj is very polish
+#mohammad is supreme leader
 import numpy as np
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 from scipy.ndimage import generic_filter, convolve
 import cv2
-#PROBLEM 6
-img = mpimg.imread('./lake.jpg')
+
+'''
+#PROBLEM 1
+img = np.zeros(shape=(10,10))
+#y, x
+img[2:9,1:2] = 1
+img[1:2,1:9] = 1
+img[2:8,8:9] = 1
+img[7:8,3:8] = 1
+img[3:7,3:4] = 1
+img[3:4,4:7] = 1
+img[4:6,6:7] = 1
+img[5:6,5:6] = 1
+#img[6:7,2:8] = 1
+plt.imshow(img,cmap='gray')
+plt.show()
+'''
+'''
+#PROBLEM 2
+img = mpimg.imread('./trump-putin.jpg')
+#img = img[0:200,100:300]
+img = img[200:400,400:600]
+plt.imshow(img)
+plt.show()
+'''
+'''
+#PROBLEM 3
+img1 = mpimg.imread('./striped-leaf-pattern-0.jpg')
+img2 = mpimg.imread('./striped-leaf-pattern-1.jpg')
+binarize = np.where(img2>0,img2,img1)
+plt.imsave("binarize.jpg",binarize)
+plt.imshow(binarize)
+plt.show()
+'''
+'''
+#PROBLEM 4
+img = mpimg.imread('./strawberry.jpg')
+img2 = mpimg.imread('./strawberry-solved.jpg')
+img_height, img_width, _ = img.shape
+
+#flipping image horizontally
+#img = img[:,::-1]
+img = cv2.flip(img, 1)
+
+#correcting image size
+#img = img[np.arange(0, img_height, 2)]
+img = cv2.resize(img, (600, 450))
+
+#inverting the image
+img = 255 - img
+
+plt.imshow(img)
+plt.show()
+plt.imshow(img2) #x: 150 -> 600  y: 225 -> 450
+plt.show()
+'''
 '''
 #PROBLEM 5
 #PART A
@@ -52,58 +107,5 @@ img5 = cv2.Laplacian(blur,cv2.CV_8U, ksize=3)
 plt.imshow(img5)
 plt.show()
 '''
-'''
-#PROBLEM 4
-img = mpimg.imread('./strawberry.jpg')
-img2 = mpimg.imread('./strawberry-solved.jpg')
-img_height, img_width, _ = img.shape
-
-#flipping image horizontally
-#img = img[:,::-1]
-img = cv2.flip(img, 1)
-
-#correcting image size
-#img = img[np.arange(0, img_height, 2)]
-img = cv2.resize(img, (600, 450))
-
-#inverting the image
-img = 255 - img
-
-plt.imshow(img)
-plt.show()
-plt.imshow(img2) #x: 150 -> 600  y: 225 -> 450
-plt.show()
-'''
-'''
-#PROBLEM 3
-img1 = mpimg.imread('./striped-leaf-pattern-0.jpg')
-img2 = mpimg.imread('./striped-leaf-pattern-1.jpg')
-binarize = np.where(img2>0,img2,img1)
-plt.imsave("binarize.jpg",binarize)
-#plt.imshow(binarize)
-#plt.show()
-'''
-'''
-#PROBLEM 2
-img = mpimg.imread('./trump-putin.jpg')
-#img = img[0:200,100:300]
-img = img[200:400,400:600]
-plt.imshow(img)
-plt.show()
-'''
-'''
-#PROBLEM 1
-img = np.zeros(shape=(10,10))
-#y, x
-img[2:9,1:2] = 1
-img[1:2,1:9] = 1
-img[2:8,8:9] = 1
-img[7:8,3:8] = 1
-img[3:7,3:4] = 1
-img[3:4,4:7] = 1
-img[4:6,6:7] = 1
-img[5:6,5:6] = 1
-#img[6:7,2:8] = 1
-plt.imshow(img,cmap='gray')
-plt.show()
-'''
+#PROBLEM 6
+#img = mpimg.imread('./lake.jpg')
