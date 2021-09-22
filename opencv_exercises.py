@@ -2,7 +2,44 @@
 import numpy as np
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
+from scipy.ndimage import generic_filter, convolve
+import cv2
 
+#PROBLEM 4
+img = mpimg.imread('./strawberry.jpg')
+img2 = mpimg.imread('./strawberry-solved.jpg')
+img_height, img_width, _ = img.shape
+
+img = img[np.arange(0,img_height):]
+plt.imshow(img)
+plt.show()
+plt.imshow(img2) #x: 150 -> 600  y: 225 -> 450
+plt.show()
+
+'''
+#PROBLEM 5
+img = mpimg.imread('./rose-piano.jpg')
+img = img / 255
+blur_kernel = [[
+    [1/9,1/9,1/9],
+    [1/9,1/9,1/9],
+    [1/9,1/9,1/9]]]
+
+blur_kernel = np.array(blur_kernel)
+blur_kernel /= np.sum(blur_kernel)  # ensure kernel sums to ~1
+
+blurred = convolve(img, blur_kernel)
+plt.imshow(blurred)
+plt.show()
+
+
+ # THIS IS FOR PART B
+img2 = mpimg.imread('./rose-piano.jpg')
+blur = cv2.GaussianBlur(img2,(5,5),0)
+plt.imshow(blur)
+plt.show()
+'''
+'''
 #PROBLEM 3
 img1 = mpimg.imread('./striped-leaf-pattern-0.jpg')
 img2 = mpimg.imread('./striped-leaf-pattern-1.jpg')
@@ -10,7 +47,7 @@ binarize = np.where(img2>0,img2,img1)
 plt.imsave("binarize.jpg",binarize)
 #plt.imshow(binarize)
 #plt.show()
-
+'''
 '''
 #PROBLEM 2
 img = mpimg.imread('./trump-putin.jpg')
