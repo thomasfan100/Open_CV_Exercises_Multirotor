@@ -107,5 +107,35 @@ img5 = cv2.Laplacian(blur,cv2.CV_8U, ksize=3)
 plt.imshow(img5)
 plt.show()
 '''
+'''
 #PROBLEM 6
-#img = mpimg.imread('./lake.jpg')
+img = mpimg.imread('./lake.jpg')
+vectorized = img.reshape((-1,3))
+vectorized = np.float32(vectorized)
+
+termination_criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+
+K = 3
+_, label, center = cv2.kmeans(vectorized, K, bestLabels=None, criteria=termination_criteria, attempts=10, flags=0)
+result_image = np.uint8(center)[label.flatten()]
+result_image = result_image.reshape((img.shape))
+
+plt.imshow(result_image)
+plt.show()
+
+K = 5
+_, label, center = cv2.kmeans(vectorized, K, bestLabels=None, criteria=termination_criteria, attempts=10, flags=0)
+result_image = np.uint8(center)[label.flatten()]
+result_image = result_image.reshape((img.shape))
+
+plt.imshow(result_image)
+plt.show()
+
+K = 7
+_, label, center = cv2.kmeans(vectorized, K, bestLabels=None, criteria=termination_criteria, attempts=10, flags=0)
+result_image = np.uint8(center)[label.flatten()]
+result_image = result_image.reshape((img.shape))
+
+plt.imshow(result_image)
+plt.show()
+'''
