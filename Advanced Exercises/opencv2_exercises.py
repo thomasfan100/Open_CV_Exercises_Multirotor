@@ -40,3 +40,9 @@ if __name__ == "__main__":
     NUM_TEST = 1000000 #multiple number of wins to get winrate
     rolls = craps(NUM_TEST)
     '''
+    #Mario Bros
+    img = mpimg.imread('./mario.jpg')
+
+    
+    plt.imshow(img)
+    plt.show()
