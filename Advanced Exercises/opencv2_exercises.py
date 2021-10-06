@@ -1,3 +1,4 @@
+#car
 import numpy as np
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
@@ -34,6 +35,20 @@ def craps(rolls):
 def roll(rolls):
     return np.random.randint(1,7,size=rolls) + np.random.randint(1,7,size=rolls)
 
+def wario(img):
+    #split image
+    img2 = img[0:210]
+    img3 = img[210:]
+    
+    img2 = np.where(img2 == [243,65,53],[255,247,0], img2)
+    img2 = np.where(img2 == [127,128,0], [0,0,0], img2)
+    img2 = np.where(img2 == [255,151,0],[205,151,1], img2)
+    img = np.concatenate((img2,img3),axis = 0)
+    #img3 = img[210:]
+    #reds = np.where(meanb > 250,255,25)
+
+    return img
+
 if __name__ == "__main__":
     '''
     #MONTE CARLO SIMULATION
@@ -41,8 +56,11 @@ if __name__ == "__main__":
     rolls = craps(NUM_TEST)
     '''
     #Mario Bros
+    warioo = mpimg.imread('./wario.png')
     img = mpimg.imread('./mario.jpg')
-
+    img = wario(img)
     
     plt.imshow(img)
+    plt.show()
+    plt.imshow(warioo)
     plt.show()
