@@ -77,6 +77,32 @@ def changeColor(img,color, newcolor):
     img = np.where(mask, newcolor, img)
     return img
 
+def tomato(image):
+    vectorized = img.reshape((-1, 3)) #makes sure its 3 columns?
+    #idxs = np.array([idx for idx, _ in np.ndenumerate(np.mean(img, axis=2))]) #gets all indexes, [0,1],[0,2],etc.
+    #vectorized = np.hstack((vectorized,idxs)) #adds x,y indexes to vectorized
+    termination_criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+    K = 9 #Number of colors we want
+    _, label, center = cv2.kmeans(np.float32(vectorized), K, bestLabels=None, criteria=termination_criteria, attempts=10, flags=0)
+
+    k_image = np.uint8(center)[label.flatten()]
+    k_image = k_image.reshape((image.shape))
+    
+    
+    ## Mask for reds
+    img_hsv = cv2.cvtColor(k_image, cv2.COLOR_RGB2HSV)
+    plt.imshow(img_hsv)
+    plt.show()
+    lower_red = np.array([0, 70, 50])
+    upper_red = np.array([10, 255, 255])
+
+    mask = cv2.inRange(img_hsv, lower_red, upper_red)
+    mask = np.dstack((mask, mask, mask))
+
+    output_image = np.copy(image)
+    output_image = np.where(mask==(0, 0, 0), output_image, 255 - output_image)
+    return output_image
+
 if __name__ == "__main__":
     '''
     #MONTE CARLO SIMULATION
@@ -97,6 +123,7 @@ if __name__ == "__main__":
     
     #tomatoes
     img = mpimg.imread('./tomatoes.jpg')
+    img = tomato(img)
     plt.imshow(img)
     plt.show()
     
