@@ -90,17 +90,17 @@ def tomato(image):
     
     
     ## Mask for reds
-    img_hsv = cv2.cvtColor(k_image, cv2.COLOR_RGB2HSV)
+    img_hsv = cv2.cvtColor(k_image, cv2.COLOR_RGB2HSV) #convert the color to a new color space... why?
     plt.imshow(img_hsv)
     plt.show()
     lower_red = np.array([0, 70, 50])
     upper_red = np.array([10, 255, 255])
 
-    mask = cv2.inRange(img_hsv, lower_red, upper_red)
-    mask = np.dstack((mask, mask, mask))
+    mask = cv2.inRange(img_hsv, lower_red, upper_red) #check if it is between lower red range and upper range
+    mask = np.dstack((mask, mask, mask)) 
 
     output_image = np.copy(image)
-    output_image = np.where(mask==(0, 0, 0), output_image, 255 - output_image)
+    output_image = np.where(mask==(0, 0, 0), output_image, 255 - output_image) #replace reds with inverted of red aka blue
     return output_image
 
 if __name__ == "__main__":
@@ -120,10 +120,11 @@ if __name__ == "__main__":
     plt.imshow(wario_solution)
     plt.show()
     '''
-    
+    '''
     #tomatoes
     img = mpimg.imread('./tomatoes.jpg')
     img = tomato(img)
     plt.imshow(img)
     plt.show()
+    '''
     
