@@ -75,12 +75,17 @@ def findCountours(img):
     plt.imshow(image_copy)
     plt.show()
     '''
+def cannyEdge(img):
+    #https://learnopencv.com/edge-detection-using-opencv/#canny-edge
+    print("not done yet")
 if __name__ == '__main__':
     #img = cv2.imread('./images/basic.jpg')
     img = cv2.imread('./images/basic2.jpg')
     #img = cv2.imread("./images/SUAS2012.jpg")
     #findCountours(img)
-    hsvslider(img)
+    #hsvslider(img)
+    cannyEdge(img)
+    
     
 
  
