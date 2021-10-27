@@ -15,8 +15,8 @@ class Standard_Characteristics:
 def nothing(x):
     pass
 def hsvslider(img):
-    
     cv2.namedWindow("Trackbars")
+    cv2.resizeWindow("Trackbars", 1000,350)
     cv2.createTrackbar("L - H", "Trackbars", 0, 179, nothing)
     cv2.createTrackbar("L - S", "Trackbars", 0, 255, nothing)
     cv2.createTrackbar("L - V", "Trackbars", 0, 255, nothing)
